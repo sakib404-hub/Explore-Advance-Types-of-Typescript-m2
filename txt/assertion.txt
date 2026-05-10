@@ -1,0 +1,54 @@
+TypeScript-এ Type Assertion হলো এমন একটি পদ্ধতি যেখানে তুমি compiler-কে বলো:
+
+“এই ভ্যালুর টাইপ কী, আমি জানি — তুমি সেটাই ধরে নাও।”
+
+এটা runtime-এ কিছুই পরিবর্তন করে না, শুধু TypeScript কীভাবে টাইপ চেক করবে সেটাকে প্রভাবিত করে।
+
+🔹 কেন Type Assertion ব্যবহার করা হয়?
+
+অনেক সময় TypeScript নিজে থেকে সঠিক টাইপ বুঝতে পারে না, যেমন:
+
+DOM element নিয়ে কাজ করলে
+API response এলে
+unknown বা any টাইপ থাকলে
+
+তখন আমরা manually টাইপ বলে দিই।
+
+🔹 Syntax (লেখার নিয়ম)
+1. as ব্যবহার (সবচেয়ে বেশি ব্যবহৃত)
+let value: unknown = "Hello";
+
+let length = (value as string).length;
+2. Angle bracket syntax
+let value: unknown = "Hello";
+
+let length = (<string>value).length;
+
+⚠️ সাধারণত as ব্যবহার করাই ভালো (বিশেষ করে React-এ)।
+
+🔹 Example (DOM)
+const input = document.getElementById("name") as HTMLInputElement;
+
+input.value = "Shakib";
+
+এখানে TypeScript ভাবে input হতে পারে HTMLElement | null,
+কিন্তু আমরা বলছি এটা আসলে HTMLInputElement।
+
+🔹 গুরুত্বপূর্ণ বিষয়
+এটা type conversion না (যেমন number → string না)
+এটা শুধু compiler-কে বোঝানোর জন্য
+ভুল assertion দিলে runtime error হতে পারে
+🔹 কখন ব্যবহার করা উচিত না?
+
+অতিরিক্ত ব্যবহার করা উচিত না। তার বদলে চেষ্টা করো:
+
+সঠিক typing দেওয়া
+type guard ব্যবহার করা
+interface ব্যবহার করা
+🔹 সহজভাবে বুঝলে
+
+Type assertion মানে:
+
+“আমি জানি এটা কী — তুমি প্রশ্ন কোরো না।”
+
+ভুল হলে কিন্তু error খেতেই হবে 😄
