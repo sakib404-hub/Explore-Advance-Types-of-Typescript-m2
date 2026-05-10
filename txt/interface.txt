@@ -1,0 +1,48 @@
+🔹 Type Alias কী?
+
+একটা টাইপকে নতুন নামে define করা।
+
+type User = {
+  name: string;
+  age: number;
+};
+
+✔️ object, union, primitive—সবকিছুর জন্য ব্যবহার করা যায়
+
+🔹 Interface কী?
+
+মূলত object structure define করার জন্য ব্যবহার হয়।
+
+interface User {
+  name: string;
+  age: number;
+}
+
+✔️ mainly object-এর shape define করতে ব্যবহার হয়
+
+🔑 পার্থক্য
+1. Extend / Inheritance
+interface A { name: string }
+interface B extends A { age: number }
+type A = { name: string }
+type B = A & { age: number }
+2. Declaration Merging (শুধু interface)
+interface User { name: string }
+interface User { age: number }
+
+// merge হয়ে যাবে
+
+❌ type alias-এ এটা হয় না
+
+3. Flexibility
+type ID = string | number; // possible
+
+❌ interface দিয়ে union করা যায় না
+
+🔹 কখন কোনটা ব্যবহার করবো?
+👉 Interface → object, class, large structure
+👉 Type alias → union, tuple, complex type
+🔹 Short rule
+
+Interface = object এর জন্য best
+Type = বেশি flexible
